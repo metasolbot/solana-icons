@@ -10,7 +10,7 @@ interface Icon {
 }
 
 async function getIcons(): Promise<Icon[]> {
-  const svgDir = path.join(process.cwd(), '..', 'svg');
+  const svgDir = path.join(process.cwd(), 'public', 'svg');
   const icons: Icon[] = [];
   
   const categories = fs.readdirSync(svgDir).filter(item => {
