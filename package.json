@@ -1,0 +1,28 @@
+{
+  "name": "solana-icons",
+  "version": "0.1.0",
+  "description": "Icon library for Solana ecosystem projects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "svg"
+  ],
+  "scripts": {
+    "build": "echo 'Build scripts coming soon'",
+    "dev": "echo 'Dev mode coming soon'"
+  },
+  "keywords": [
+    "solana",
+    "icons",
+    "svg",
+    "react",
+    "web3"
+  ],
+  "author": "Metasal",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metasolbot/solana-icons"
+  }
+}
