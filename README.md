@@ -8,9 +8,12 @@ A comprehensive, open-source icon set covering:
 - **Wallets**: Phantom, Backpack, Solflare, etc.
 - **DEXes**: Jupiter, Raydium, Orca, Meteora, etc.
 - **Protocols**: Marinade, Jito, Sanctum, Kamino, etc.
-- **NFT Platforms**: Magic Eden, Tensor, etc.
+- **NFT Platforms**: Magic Eden, Tensor, Metaplex, etc.
 - **Infrastructure**: Helius, Triton, QuickNode, etc.
-- **Core Concepts**: SOL token, staking, compressed NFTs, etc.
+- **Payments**: Solana Pay, TipLink, Sphere, etc.
+- **Gaming**: Star Atlas, Genopets, Aurory, etc.
+- **Social**: Dialect, Clawbook, Only1, etc.
+- **Core Concepts**: SOL token, staking, compressed NFTs, Blinks, etc.
 
 ## Status
 
@@ -33,9 +36,27 @@ A comprehensive, open-source icon set covering:
 - ✅ Trezor
 - ✅ WalletConnect
 
+## Categories
+
+```
+svg/
+├── wallets/       (15 icons) ✅
+├── dexes/         (coming soon)
+├── protocols/     (coming soon)
+├── nft/           (coming soon)
+├── infrastructure/ (coming soon)
+├── payments/      (coming soon)
+├── gaming/        (coming soon)
+├── social/        (coming soon)
+└── core/          (coming soon)
+```
+
+See each category's README for wanted icons.
+
 ## Planned Features
 
 - ✅ SVG source files
+- ✅ Organized categories
 - ⬜ React components
 - ⬜ Vue components
 - ⬜ Web font
