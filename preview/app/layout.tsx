@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Solana Icons - Open Source Icon Library",
-  description: "Comprehensive icon library for the Solana ecosystem. Like Font Awesome for Solana. Free and open source.",
+  title: "Solana Icons - Open Source Icon Library for Solana Ecosystem",
+  description: "Beautiful, open-source icon library for the Solana ecosystem. 16+ icons across wallets, infrastructure, and more. Free SVG and PNG downloads.",
   openGraph: {
     title: "Solana Icons",
     description: "Open source icon library for the Solana ecosystem",
