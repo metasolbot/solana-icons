@@ -1,0 +1,25 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10" fill="url(#triton_grad)"/>
+<path d="M13.5 10.7C8.7 7.9 4.1 9.6 2.4 10.7V23.5H25V10.3C23.2 11.5 18.3 13.5 13.5 10.7Z" fill="url(#triton_wave1)"/>
+<path d="M12.2 11.8C17.3 8.9 22.2 10.6 24 11.8V25.4H-0.1V11.4C1.9 12.7 7.1 14.8 12.2 11.8Z" fill="url(#triton_wave2)"/>
+<path d="M18.8 17.1C12.9 13.7 7.3 15.7 5.3 17.1V32.5H32.7V16.6C30.5 18.2 24.6 20.5 18.8 17.1Z" fill="url(#triton_wave3)"/>
+<circle cx="12" cy="12" r="8.5" stroke="white" stroke-width="0.9" fill="none"/>
+<defs>
+<linearGradient id="triton_grad" x1="9.9" y1="6.3" x2="12" y2="20.1" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DFDCF2"/>
+<stop offset="0.29" stop-color="white"/>
+</linearGradient>
+<linearGradient id="triton_wave1" x1="13.7" y1="9.1" x2="13.7" y2="23.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3311FF"/>
+<stop offset="1" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="triton_wave2" x1="12" y1="10.2" x2="12" y2="25.4" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A12CFF"/>
+<stop offset="1" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="triton_wave3" x1="19" y1="15.3" x2="19" y2="32.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F606FF"/>
+<stop offset="1" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

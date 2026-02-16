@@ -26,24 +26,19 @@ A comprehensive, open-source icon set covering:
 
 ## Status
 
-🚧 **Early Development** - 15 wallet icons added, more coming soon!
+🚧 **Early Development** - 16 icons added, more coming soon!
 
 **Current Icons:**
-- ✅ Phantom
-- ✅ Backpack
-- ✅ Solflare
-- ✅ Coinbase
-- ✅ TipLink
-- ✅ Coin98
-- ✅ Trust Wallet
-- ✅ Magic Eden Wallet
-- ✅ Jupiter Wallet
-- ✅ Ledger
-- ✅ Wallet12
-- ✅ OKX Wallet
-- ✅ Bitget Wallet
-- ✅ Trezor
-- ✅ WalletConnect
+
+**Wallets (15):**
+- ✅ Phantom, Backpack, Solflare, Coinbase
+- ✅ TipLink, Coin98, Trust Wallet
+- ✅ Magic Eden Wallet, Jupiter Wallet
+- ✅ Ledger, Wallet12, OKX Wallet
+- ✅ Bitget Wallet, Trezor, WalletConnect
+
+**Infrastructure (1):**
+- ✅ Triton
 
 ## Usage
 
@@ -70,15 +65,15 @@ npm install solana-icons
 
 ```
 svg/
-├── wallets/       (15 icons) ✅
-├── dexes/         (coming soon)
-├── protocols/     (coming soon)
-├── nft/           (coming soon)
-├── infrastructure/ (coming soon)
-├── payments/      (coming soon)
-├── gaming/        (coming soon)
-├── social/        (coming soon)
-└── core/          (coming soon)
+├── wallets/        (15 icons) ✅
+├── infrastructure/ (1 icon) ✅
+├── dexes/          (coming soon)
+├── protocols/      (coming soon)
+├── nft/            (coming soon)
+├── payments/       (coming soon)
+├── gaming/         (coming soon)
+├── social/         (coming soon)
+└── core/           (coming soon)
 ```
 
 See each category's README for wanted icons.
