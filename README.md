@@ -2,7 +2,7 @@
 
 Icon library for the Solana ecosystem. Like Font Awesome or Lucide, but for Solana projects.
 
-**🌐 [View all icons](http://localhost:3456)** | [GitHub](https://github.com/metasolbot/solana-icons)
+**🌐 [View all icons](https://preview-metasal.vercel.app)** | [GitHub](https://github.com/metasolbot/solana-icons)
 
 ## Vision
 
