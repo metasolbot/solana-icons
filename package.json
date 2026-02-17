@@ -1,6 +1,6 @@
 {
   "name": "solana-icons",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Open-source icon library for the Solana ecosystem",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -17,6 +17,7 @@
   "files": [
     "dist",
     "svg",
+    "webp",
     "README.md",
     "LICENSE"
   ],

@@ -37,6 +37,29 @@ for (const category of categories) {
   }
 }
 
+// Collect webp icons
+const webpIcons = {};
+const WEBP_DIR = path.join(__dirname, '..', 'webp');
+if (fs.existsSync(WEBP_DIR)) {
+  const webpCategories = fs.readdirSync(WEBP_DIR).filter(item =>
+    fs.statSync(path.join(WEBP_DIR, item)).isDirectory()
+  );
+  for (const category of webpCategories) {
+    const categoryPath = path.join(WEBP_DIR, category);
+    const files = fs.readdirSync(categoryPath).filter(f => f.endsWith('.webp'));
+    for (const file of files) {
+      const filePath = path.join(categoryPath, file);
+      const iconName = file.replace('.webp', '');
+      const key = `${category}/${iconName}`;
+      webpIcons[key] = {
+        name: iconName,
+        category,
+        webp: fs.readFileSync(filePath).toString('base64')
+      };
+    }
+  }
+}
+
 // Generate CommonJS index
 const cjsExports = Object.entries(icons).map(([key, icon]) => {
   const varName = key.replace(/[^a-zA-Z0-9]/g, '_');
@@ -48,6 +71,7 @@ ${cjsExports}
 
 exports.icons = ${JSON.stringify(icons, null, 2)};
 exports.categories = ${JSON.stringify(categories)};
+exports.webpIcons = ${JSON.stringify(webpIcons)};
 `;
 
 fs.writeFileSync(path.join(DIST_DIR, 'index.js'), cjsIndex);
@@ -63,6 +87,7 @@ ${esmExports}
 
 export const icons = ${JSON.stringify(icons, null, 2)};
 export const categories = ${JSON.stringify(categories)};
+export const webpIcons = ${JSON.stringify(webpIcons)};
 `;
 
 fs.writeFileSync(path.join(DIST_DIR, 'index.mjs'), esmIndex);
@@ -84,6 +109,14 @@ ${Object.entries(icons).map(([key]) => {
 
 export declare const icons: Record<IconKey, Icon>;
 export declare const categories: string[];
+
+export interface WebpIcon {
+  name: string;
+  category: string;
+  webp: string;
+}
+
+export declare const webpIcons: Record<string, WebpIcon>;
 `;
 
 fs.writeFileSync(path.join(DIST_DIR, 'index.d.ts'), tsInterface);
