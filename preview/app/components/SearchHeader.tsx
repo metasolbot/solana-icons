@@ -7,6 +7,7 @@ interface Icon {
   name: string;
   category: string;
   svg: string;
+  imgPath?: string;
   path: string;
 }
 
