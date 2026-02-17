@@ -109,14 +109,45 @@ svg/
 
 See each category's README for wanted icons.
 
+## Platform Icons (Jupiter Platform List)
+
+**346 platform logos** sourced from [jup-ag/platform-list](https://github.com/jup-ag/platform-list/tree/main/img) — covering all major Solana DeFi protocols, DEXes, and apps.
+
+Available in two formats:
+
+| Format | Location | Description |
+|--------|----------|-------------|
+| WebP | `webp/platforms/` | Original quality WebP files |
+| SVG | `svg/platforms/` | SVG wrappers with embedded PNG (works everywhere SVG is accepted) |
+
+### Usage
+
+```js
+import { webpIcons } from 'solana-icons';
+
+// Access a platform icon by key
+const jupiter = webpIcons['platforms/jupiter'];
+// => { name: 'jupiter', category: 'platforms', webp: '<base64>' }
+
+// Use as an image src
+const imgSrc = `data:image/webp;base64,${jupiter.webp}`;
+```
+
+Or use the SVG files directly:
+
+```html
+<img src="https://raw.githubusercontent.com/metasal1/solana-icons/main/webp/platforms/jupiter.webp" />
+```
+
 ## Planned Features
 
 - ✅ SVG source files
 - ✅ Organized categories
+- ✅ WebP platform icons (346 from Jupiter platform-list)
+- ✅ npm package
 - ⬜ React components
 - ⬜ Vue components
 - ⬜ Web font
-- ⬜ npm package
 - ⬜ CDN hosting
 - ⬜ Figma plugin
 
