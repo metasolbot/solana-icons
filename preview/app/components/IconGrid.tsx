@@ -6,6 +6,7 @@ interface Icon {
   name: string;
   category: string;
   svg: string;
+  imgPath?: string;
   path: string;
 }
 
@@ -13,18 +14,29 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
   const [copied, setCopied] = useState<string | null>(null);
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
-  const copyToClipboard = async (svg: string, name: string) => {
-    await navigator.clipboard.writeText(svg);
-    setCopied(name);
+  const copyToClipboard = async (icon: Icon) => {
+    const text = icon.imgPath
+      ? icon.imgPath  // copy the public URL for raster icons
+      : icon.svg;     // copy inline SVG for vector icons
+    await navigator.clipboard.writeText(text);
+    setCopied(icon.name);
     setTimeout(() => setCopied(null), 2000);
   };
 
-  const downloadSvg = (svg: string, name: string) => {
-    const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const downloadSvg = (icon: Icon) => {
+    if (icon.imgPath) {
+      // Download the webp directly
+      const a = document.createElement('a');
+      a.href = icon.imgPath;
+      a.download = `${icon.name}.webp`;
+      a.click();
+      return;
+    }
+    const blob = new Blob([icon.svg], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${name}.svg`;
+    a.download = `${icon.name}.svg`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -93,26 +105,28 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900/90 rounded-lg">
               <div className="flex flex-col gap-1 w-full px-2">
                 <button
-                  onClick={() => copyToClipboard(icon.svg, icon.name)}
+                  onClick={() => copyToClipboard(icon)}
                   className="w-full px-2 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded text-[10px] transition flex items-center justify-center gap-1"
                 >
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
-                  Copy
+                  {icon.imgPath ? 'Copy URL' : 'Copy SVG'}
                 </button>
                 <button
-                  onClick={() => downloadSvg(icon.svg, icon.name)}
+                  onClick={() => downloadSvg(icon)}
                   className="w-full px-2 py-1.5 bg-gray-700 hover:bg-gray-600 text-white rounded text-[10px] transition flex items-center justify-center gap-1"
                 >
-                  SVG
+                  {icon.imgPath ? 'WebP' : 'SVG'}
                 </button>
-                <button
-                  onClick={() => downloadPng(icon.svg, icon.name, 512)}
-                  className="w-full px-2 py-1.5 bg-gray-700 hover:bg-gray-600 text-white rounded text-[10px] transition flex items-center justify-center gap-1"
-                >
-                  PNG
-                </button>
+                {!icon.imgPath && (
+                  <button
+                    onClick={() => downloadPng(icon.svg, icon.name, 512)}
+                    className="w-full px-2 py-1.5 bg-gray-700 hover:bg-gray-600 text-white rounded text-[10px] transition flex items-center justify-center gap-1"
+                  >
+                    PNG
+                  </button>
+                )}
               </div>
             </div>
 
