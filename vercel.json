@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd preview && cp -r ../svg/* public/svg/ && mkdir -p public/webp && cp -r ../webp/* public/webp/ && npm install && npm run build",
-  "outputDirectory": "preview/.next",
-  "framework": "nextjs",
-  "installCommand": "cd preview && npm install"
-}

@@ -1,6 +1,3 @@
 {
-  "buildCommand": "cp -r ../svg/* public/svg/ && mkdir -p public/webp && cp -r ../webp/* public/webp/ && npm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "installCommand": "npm install"
+  "buildCommand": "mkdir -p public/svg public/brand && cp -r ../svg/* public/svg/ && npm run build"
 }
