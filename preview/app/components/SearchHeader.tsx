@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import { IconGrid } from './IconGrid';
-import { useTheme } from './ThemeProvider';
 
 interface Icon {
   name: string;
@@ -19,7 +18,6 @@ interface SearchHeaderProps {
 export function SearchHeader({ icons, categories }: SearchHeaderProps) {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const { theme, toggleTheme } = useTheme();
 
   const filteredIcons = useMemo(() => {
     let filtered = icons;
@@ -48,8 +46,8 @@ export function SearchHeader({ icons, categories }: SearchHeaderProps) {
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                S
+              <div className="w-10 h-10 flex items-center justify-center">
+                <img src="/svg/platforms/solana.svg" alt="Solana" className="w-full h-full" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Solana Icons</h1>
@@ -57,13 +55,6 @@ export function SearchHeader({ icons, categories }: SearchHeaderProps) {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button
-                onClick={toggleTheme}
-                className="px-3 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-sm transition"
-                title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              >
-                {theme === 'dark' ? '☀️' : '🌙'}
-              </button>
               <a 
                 href="https://github.com/metasolbot/solana-icons"
                 target="_blank"
@@ -147,17 +138,22 @@ export function SearchHeader({ icons, categories }: SearchHeaderProps) {
 
       {/* Footer */}
       <div className="border-t border-gray-200 dark:border-gray-800 mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-8 text-center text-gray-500 dark:text-gray-500 text-sm">
-          <p>Made for the Solana ecosystem • MIT License</p>
-          <p className="mt-2">
-            <a href="https://github.com/metasolbot/solana-icons/issues" target="_blank" className="hover:text-purple-400 transition">
-              Request an icon
-            </a>
-            {' • '}
-            <a href="https://github.com/metasolbot/solana-icons/blob/main/CONTRIBUTING.md" target="_blank" className="hover:text-purple-400 transition">
-              Contribute
-            </a>
-          </p>
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex flex-col items-center gap-4">
+            <img src="/svg/brand/powered-by-color.svg" alt="Powered by Solana" className="w-44 h-auto" />
+            <div className="text-center text-gray-500 dark:text-gray-500 text-sm">
+              <p>Made for the Solana ecosystem • MIT License</p>
+              <p className="mt-2">
+                <a href="https://github.com/metasolbot/solana-icons/issues" target="_blank" className="hover:text-purple-400 transition">
+                  Request an icon
+                </a>
+                {' • '}
+                <a href="https://github.com/metasolbot/solana-icons/blob/main/CONTRIBUTING.md" target="_blank" className="hover:text-purple-400 transition">
+                  Contribute
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
