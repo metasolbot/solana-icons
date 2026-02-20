@@ -6,7 +6,6 @@ import { IconGrid } from './IconGrid';
 interface Icon {
   name: string;
   category: string;
-  svg: string;
   path: string;
 }
 

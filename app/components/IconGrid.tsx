@@ -5,12 +5,12 @@ import { useState, useEffect, useRef } from 'react';
 interface Icon {
   name: string;
   category: string;
-  svg: string;
   path: string;
 }
 
 function LazyIcon({ icon, onClick }: { icon: Icon; onClick: () => void }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [svgContent, setSvgContent] = useState<string>('');
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,6 +31,15 @@ function LazyIcon({ icon, onClick }: { icon: Icon; onClick: () => void }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (isVisible && !svgContent && icon.path) {
+      fetch(`/${icon.path}`)
+        .then(res => res.text())
+        .then(svg => setSvgContent(svg))
+        .catch(() => setSvgContent('<svg></svg>'));
+    }
+  }, [isVisible, svgContent, icon.path]);
+
   return (
     <div ref={ref} className="relative group flex flex-col">
       <div 
@@ -39,10 +48,10 @@ function LazyIcon({ icon, onClick }: { icon: Icon; onClick: () => void }) {
       >
         {/* Icon */}
         <div className="absolute inset-0 flex items-center justify-center p-2">
-          {isVisible ? (
+          {svgContent ? (
             <div 
               className="w-full h-full max-w-[32px] max-h-[32px] [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
-              dangerouslySetInnerHTML={{ __html: icon.svg }}
+              dangerouslySetInnerHTML={{ __html: svgContent }}
             />
           ) : (
             <div className="w-8 h-8 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
@@ -61,6 +70,15 @@ function LazyIcon({ icon, onClick }: { icon: Icon; onClick: () => void }) {
 export function IconGrid({ icons }: { icons: Icon[] }) {
   const [copied, setCopied] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState<Icon | null>(null);
+  const [selectedSvg, setSelectedSvg] = useState<string>('');
+
+  const openModal = async (icon: Icon) => {
+    setSelectedIcon(icon);
+    if (icon.path) {
+      const svg = await fetch(`/${icon.path}`).then(res => res.text());
+      setSelectedSvg(svg);
+    }
+  };
 
   const copyToClipboard = async (svg: string) => {
     await navigator.clipboard.writeText(svg);
@@ -114,7 +132,7 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
           <LazyIcon 
             key={icon.path} 
             icon={icon} 
-            onClick={() => setSelectedIcon(icon)} 
+            onClick={() => openModal(icon)} 
           />
         ))}
       </div>
@@ -142,10 +160,14 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
             {/* Icon preview */}
             <div className="flex flex-col items-center mb-6">
               <div className="w-32 h-32 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
-                <div 
-                  className="w-24 h-24 [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
-                  dangerouslySetInnerHTML={{ __html: selectedIcon.svg }}
-                />
+                {selectedSvg ? (
+                  <div 
+                    className="w-24 h-24 [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
+                    dangerouslySetInnerHTML={{ __html: selectedSvg }}
+                  />
+                ) : (
+                  <div className="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+                )}
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{selectedIcon.name}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">{selectedIcon.category}</p>
@@ -154,8 +176,9 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
             {/* Action buttons */}
             <div className="flex flex-col gap-2">
               <button
-                onClick={() => copyToClipboard(selectedIcon.svg)}
-                className="w-full px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition flex items-center justify-center gap-2 font-medium"
+                onClick={() => copyToClipboard(selectedSvg)}
+                disabled={!selectedSvg}
+                className="w-full px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -164,8 +187,9 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
               </button>
               <div className="grid grid-cols-2 gap-2">
                 <button
-                  onClick={() => downloadSvg(selectedIcon.svg, selectedIcon.name)}
-                  className="px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg transition flex items-center justify-center gap-2 font-medium"
+                  onClick={() => downloadSvg(selectedSvg, selectedIcon.name)}
+                  disabled={!selectedSvg}
+                  className="px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg transition flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
@@ -173,8 +197,9 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
                   SVG
                 </button>
                 <button
-                  onClick={() => downloadPng(selectedIcon.svg, selectedIcon.name, 512)}
-                  className="px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg transition flex items-center justify-center gap-2 font-medium"
+                  onClick={() => downloadPng(selectedSvg, selectedIcon.name, 512)}
+                  disabled={!selectedSvg}
+                  className="px-4 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg transition flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
