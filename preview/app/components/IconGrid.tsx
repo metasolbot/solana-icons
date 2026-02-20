@@ -71,30 +71,26 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
   };
 
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1">
-      {icons.map((icon) => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1">
+      {icons.map((icon) => {
+        // Brand icons get wider aspect ratio (horizontal logos)
+        const isBrand = icon.category === 'brand';
+        const aspectClass = isBrand ? 'aspect-[3/1]' : 'aspect-square';
+        
+        return (
         <div
           key={icon.path}
-          className="relative group aspect-square"
+          className={`relative group ${aspectClass}`}
           onMouseEnter={() => setHoveredIcon(icon.name)}
           onMouseLeave={() => setHoveredIcon(null)}
         >
           <div className="absolute inset-0 bg-gray-900/30 hover:bg-gray-800/50 border border-gray-800/50 hover:border-gray-700 rounded-lg transition-all duration-200 cursor-pointer">
             {/* Icon */}
             <div className="absolute inset-0 flex items-center justify-center p-4">
-              {icon.imgPath ? (
-                <img
-                  src={icon.imgPath}
-                  alt={icon.name}
-                  className="w-8 h-8 transition-transform group-hover:scale-110 object-contain rounded"
-                  loading="lazy"
-                />
-              ) : (
-                <div
-                  className="w-8 h-8 transition-transform group-hover:scale-110"
-                  dangerouslySetInnerHTML={{ __html: icon.svg }}
-                />
-              )}
+              <div 
+                className={`${isBrand ? 'w-full h-6' : 'w-8 h-8'} transition-transform group-hover:scale-110`}
+                dangerouslySetInnerHTML={{ __html: icon.svg }}
+              />
             </div>
 
             {/* Icon name tooltip */}
@@ -142,7 +138,7 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
             )}
           </div>
         </div>
-      ))}
+      )})}
     </div>
   );
 }
