@@ -59,24 +59,19 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
   };
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1">
-      {icons.map((icon) => {
-        // Brand icons get wider aspect ratio (horizontal logos)
-        const isBrand = icon.category === 'brand';
-        const aspectClass = isBrand ? 'aspect-[3/1]' : 'aspect-square';
-        
-        return (
+    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1">
+      {icons.map((icon) => (
         <div
           key={icon.path}
-          className={`relative group ${aspectClass}`}
+          className="relative group aspect-square"
           onMouseEnter={() => setHoveredIcon(icon.name)}
           onMouseLeave={() => setHoveredIcon(null)}
         >
           <div className="absolute inset-0 bg-gray-900/30 hover:bg-gray-800/50 border border-gray-800/50 hover:border-gray-700 rounded-lg transition-all duration-200 cursor-pointer">
             {/* Icon */}
-            <div className="absolute inset-0 flex items-center justify-center p-4">
+            <div className="absolute inset-0 flex items-center justify-center p-2">
               <div 
-                className={`${isBrand ? 'w-full h-6' : 'w-8 h-8'} transition-transform group-hover:scale-110`}
+                className="w-full h-full max-w-[28px] max-h-[28px] transition-transform group-hover:scale-110 [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
                 dangerouslySetInnerHTML={{ __html: icon.svg }}
               />
             </div>
@@ -124,7 +119,7 @@ export function IconGrid({ icons }: { icons: Icon[] }) {
             )}
           </div>
         </div>
-      )})}
+      ))}
     </div>
   );
 }
