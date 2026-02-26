@@ -19,7 +19,8 @@
     "svg",
     "webp",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "png"
   ],
   "scripts": {
     "build": "node scripts/build.js",
