@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100" height="100">
+  <defs>
+    <linearGradient id="truemrr-bg" x1="60" y1="0" x2="60" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A1228"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="truemrr-sh" x1="60" y1="0" x2="60" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="white" stop-opacity="0.16"/>
+      <stop offset="50%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="26" fill="url(#truemrr-bg)"/>
+  <rect width="120" height="120" rx="26" fill="url(#truemrr-sh)"/>
+  <g stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M44 38 L60 60 L44 82"/>
+    <path d="M60 38 L76 60 L60 82"/>
+  </g>
+</svg>
