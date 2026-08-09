@@ -1,0 +1,22 @@
+# Solana Icons
+
+> Open-source icon library for the Solana ecosystem.
+
+- Site: https://icons.sol.new
+- npm: `npm i solana-icons`
+- License: MIT
+- Icons: 370+ SVG/PNG (wallets, platforms, brand, infrastructure)
+- GitHub: https://github.com/metasal1/solana-icons
+
+## Use
+
+- Browse and download SVG/PNG on the website
+- Install package for React/app usage
+- Request icons via GitHub issues
+
+## Key URLs
+
+- https://icons.sol.new/
+- https://icons.sol.new/llms-full.txt
+- https://icons.sol.new/sitemap.xml
+- https://icons.sol.new/images/opengraph.png

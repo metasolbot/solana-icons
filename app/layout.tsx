@@ -1,16 +1,28 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 const siteUrl = "https://icons.sol.new";
+const GA_ID = "G-L014ZQRPKS";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Solana Icons - Open Source Icon Library for Solana Ecosystem",
   description:
-    "Beautiful, open-source icon library for the Solana ecosystem. 370+ icons across wallets, platforms, brand, and more. Free SVG and PNG downloads.",
+    "Open-source icon library for the Solana ecosystem. 370+ free SVG and PNG icons — wallets, DEXes, platforms, brand marks, and more.",
+  keywords: [
+    "Solana icons",
+    "Solana SVG",
+    "crypto icons",
+    "wallet icons",
+    "Jupiter icon",
+    "Phantom icon",
+    "open source icons",
+  ],
+  authors: [{ name: "Metasal", url: "https://metasal.xyz" }],
   openGraph: {
     title: "Solana Icons",
     description:
@@ -18,6 +30,7 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Solana Icons",
+    locale: "en_US",
     images: [
       {
         url: "/images/opengraph.png?v=3",
@@ -44,6 +57,22 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteUrl,
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/llms-full.txt", title: "llms-full.txt" },
+      ],
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -54,7 +83,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={jetbrainsMono.className}>{children}</body>
+      <body className={jetbrainsMono.className}>
+        {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+        </Script>
+      </body>
     </html>
   );
 }

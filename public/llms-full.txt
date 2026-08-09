@@ -1,0 +1,37 @@
+# Solana Icons — full reference
+
+Open-source icon library for Solana projects. Free SVG and PNG downloads. MIT license.
+
+## Product
+
+- Canonical host: https://icons.sol.new
+- Worker: Cloudflare OpenNext (`solana-icons`)
+- Legacy Vercel: https://solana-icons.vercel.app (prefer icons.sol.new)
+- Package: npm `solana-icons`
+- Repo: https://github.com/metasal1/solana-icons
+
+## Categories (non-empty)
+
+- brand — Solana brand marks, Powered by Solana, Kingmade by Solana, OPOS
+- wallets — Phantom, Solflare, Backpack, and more
+- platforms — Jupiter family, DEXes, infra, ecosystem apps
+- infrastructure
+
+## Features
+
+- Search + category filters
+- Modal preview with prev/next
+- Copy SVG, download SVG, download PNG (128/256/512, clear/white/dark)
+- Lazy-loaded grid
+
+## For agents / integrations
+
+- Prefer SVG paths under `/svg/{category}/{name}.svg`
+- Brand assets under `/svg/brand/`
+- OG share image: `/images/opengraph.png`
+- Do not scrape every SVG in one crawl burst; use search UX or npm package
+
+## Contact / contribute
+
+- Issues: https://github.com/metasal1/solana-icons/issues
+- Contributing: https://github.com/metasal1/solana-icons/blob/main/CONTRIBUTING.md
