@@ -1,16 +1,21 @@
 {
-  "name": "preview",
+  "name": "solana-icons",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generate-icons-data.js",
     "build": "mkdir -p public/svg public/brand && cp -r package/svg/* public/svg/ && next build",
+    "build:cf": "node scripts/generate-icons-data.js && mkdir -p public/svg public/brand && cp -r package/svg/* public/svg/ && opennextjs-cloudflare build",
+    "deploy": "npm run build:cf && wrangler deploy",
     "start": "next start",
     "lint": "eslint",
-    "build:package": "cd package && node scripts/build.js"
+    "build:package": "cd package && node scripts/build.js",
+    "preview": "npm run build:cf && wrangler dev"
   },
   "dependencies": {
-    "next": "16.1.6",
+    "@opennextjs/cloudflare": "^1.20.2",
+    "next": "16.3.0",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -20,8 +25,15 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4"
+  },
+  "allowScripts": {
+    "esbuild@0.25.4": true,
+    "esbuild@0.28.1": true,
+    "unrs-resolver@1.11.1": true,
+    "workerd@1.20260801.1": true
   }
 }
